@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Timetable Assistant{% endblock %}
+{% block content %}
+<div class="dash-wrapper">
+    <header class="dash-header">
+        <div>
+            <h1>📅 Timetable Assistant</h1>
+            <p class="muted">Welcome, {{ user.name }} &middot; {{ user.department }} / Sem {{ user.semester }} / Sec {{ user.section }}</p>
+        </div>
+        <a href="{{ url_for('logout') }}" class="btn-secondary">Logout</a>
+    </header>
+
+    <nav class="tabs">
+        <button class="tab-btn active" data-tab="today">Today</button>
+        <button class="tab-btn" data-tab="week">Week</button>
+        <button class="tab-btn" data-tab="exams">Exams</button>
+        <button class="tab-btn" data-tab="ask">Ask Assistant</button>
+    </nav>
+
+    <section id="tab-today" class="tab-panel active">
+        <h2 id="today-date">Loading...</h2>
+        <div id="next-class-banner" class="next-class-banner"></div>
+        <div id="today-classes" class="class-list"></div>
+    </section>
+
+    <section id="tab-week" class="tab-panel">
+        <h2>Weekly Timetable</h2>
+        <div id="week-grid" class="week-grid"></div>
+    </section>
+
+    <section id="tab-exams" class="tab-panel">
+        <h2>Exam Schedule</h2>
+        <div id="exam-list" class="class-list"></div>
+    </section>
+
+    <section id="tab-ask" class="tab-panel">
+        <h2>Ask the Timetable Assistant</h2>
+        <p class="muted">Try: "What classes do I have today?", "When is my next class?", "Do I have free periods tomorrow?"</p>
+        <div id="chat-window" class="chat-window"></div>
+        <form id="chat-form" class="chat-form">
+            <input type="text" id="chat-input" placeholder="Type your question..." autocomplete="off" required>
+            <button type="submit" class="btn-primary">Ask</button>
+        </form>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
